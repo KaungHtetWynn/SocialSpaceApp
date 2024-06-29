@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the container. (Registering our services)
 
 builder.Services.AddControllers();
 
@@ -16,9 +16,12 @@ builder.Services.AddDbContext<AppDbContext>(options => {
 // builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline. (request processing pipeline)
+// middlewares (order matters)
 // if (app.Environment.IsDevelopment())
 // {
 //     app.UseSwagger();
@@ -28,6 +31,9 @@ var app = builder.Build();
 // app.UseHttpsRedirection();
 
 // app.UseAuthorization();
+
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod()
+    .WithOrigins("http://localhost:4200", "https://localhost:4200"));
 
 // Map controllers endpoints
 app.MapControllers();
