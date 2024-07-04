@@ -6,7 +6,7 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgFor], // Can also import CommonModule instead of NgFor
+  imports: [RouterOutlet, NgFor], // Can also import CommonModule instead of NgFor, We don't need NgFor If we use @for
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
