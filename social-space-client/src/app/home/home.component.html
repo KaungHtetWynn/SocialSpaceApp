@@ -1,0 +1,42 @@
+<section>
+    <div class="container mt-5">
+        <!-- <h1>Grid</h1>
+        <p>This example demonstrates a 50%/50% split on small, medium and large devices. On extra small devices, it will
+            stack (100% width).</p>
+        <p>Resize the browser window to see the effect.</p> -->
+        @if (!showRegisterForm) {
+        <div class="row">
+            <div class="col-md-6" style="background-color:white;">
+                <div>
+                    <h1>Join <span class="text-warning">Social Space</span></h1>
+                    <p class="lead my-4">Social space helps you connect and chat with the people online.</p>
+
+                    <button class="btn btn-primary btn-lg me-2" (click)="registerFormToggle()">Register Now</button>
+                    <button class="btn btn-info btn-lg text-light">Learn More</button>
+                </div>
+            </div>
+            <div class="col-md-6" style="background-color:white;">
+                <img class="img-fluid w-50 d-none d-sm-block" src="" alt="">
+            </div>
+        </div>
+        } @else {
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-6">
+
+                    <!-- app-register is child component of home component -->
+                    <!-- (cancelRegistration) is the name of the method/property in register component -->
+                    <!-- <app-register 
+                        [usersFromHomeComponent]="users"
+                        (cancelRegistration)="hideRegisterForm($event)"
+                    ></app-register> -->
+                    <app-register (cancelRegistration)="hideRegisterForm($event)"></app-register>
+                </div>
+            </div>
+        </div>
+        }
+
+
+
+    </div>
+</section>

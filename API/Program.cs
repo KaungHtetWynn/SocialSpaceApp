@@ -44,6 +44,8 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 //             ValidateAuience = false
 //         };
 //     });
+
+// Services type is IServiceCollection
 //builder.Services.AddAppServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
 
