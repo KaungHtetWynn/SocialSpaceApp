@@ -1,0 +1,15 @@
+<button type="button" class="btn btn-primary me-2" (click)="register_error()">Validation Error</button>
+<button type="button" class="btn btn-secondary me-2" (click)="not_found()">Not Found</button>
+<button type="button" class="btn btn-danger me-2" (click)="server_error()">Server Error</button>
+<button type="button" class="btn btn-warning me-2" (click)="auth_error()">Auth Error</button>
+<button type="button" class="btn btn-info me-2" (click)="bad_request()">Bad Request</button>
+
+@if(validationErrors.length > 0) {
+<div class="alert alert-danger mt-2" role="alert">
+    <ul>
+        @for (item of validationErrors; track $index) {
+            <li>{{item}}</li>
+        }
+    </ul>
+</div>
+}

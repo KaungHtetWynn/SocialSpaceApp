@@ -20,7 +20,7 @@ public class AccountController : BaseApiController
         _tokenService = tokenService;
     }
 
-    [HttpPost("register")] // account/register [don't confuse with (Name = "GetWeatherForecast")]
+    [HttpPost("register")] // api/account/register [don't confuse with (Name = "GetWeatherForecast")]
     public async Task<ActionResult<UserDto>> Register(RegistrationDto registrationDto)
     {
         if (await CheckIfUserExists(registrationDto.UserName))
