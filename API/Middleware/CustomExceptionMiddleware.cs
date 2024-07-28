@@ -16,6 +16,8 @@ public class CustomExceptionMiddleware(RequestDelegate next, ILogger<CustomExcep
 
     // }
 
+    // Request will come in pass through this middleware
+    // and for error response I think this happens on the way out from the pipeline to the client
     // When we're using middleware we have to call the invoke async because that is what is being expected 
     // when we call the next method that's going to look for an invoke async method.
     public async Task InvokeAsync(HttpContext context)
@@ -24,14 +26,14 @@ public class CustomExceptionMiddleware(RequestDelegate next, ILogger<CustomExcep
         {
             // We're simply going to move on to the next request delegate.
             // We're only handling errors inside here, and we're not doing anything with the HTTP request itself 
-        Console.WriteLine("No Exception Occured ***");
+        Console.WriteLine("*** No Exception Occured ***");
             await next(context);
         }
         catch (Exception ex)
         {
-            // log to console
+            // logs to console
             //logger.LogError(ex, ex.Message);
-            Console.WriteLine("Exception Occured ***");
+            Console.WriteLine("*** Exception Occured ***");
 
             // http response
             context.Response.ContentType = "application/json";
@@ -48,6 +50,7 @@ public class CustomExceptionMiddleware(RequestDelegate next, ILogger<CustomExcep
 
             var json = JsonSerializer.Serialize(response, options);
 
+            // writes the JSON string to the HTTP response body asynchronously.
             await context.Response.WriteAsync(json);
         }
     }

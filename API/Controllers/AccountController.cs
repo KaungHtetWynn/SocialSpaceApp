@@ -23,33 +23,36 @@ public class AccountController : BaseApiController
     [HttpPost("register")] // api/account/register [don't confuse with (Name = "GetWeatherForecast")]
     public async Task<ActionResult<UserDto>> Register(RegistrationDto registrationDto)
     {
-        if (await CheckIfUserExists(registrationDto.UserName))
-        {
-            return BadRequest("Username already exists");
-        }
+        return Ok();
+        // if (await CheckIfUserExists(registrationDto.UserName))
+        // {
+        //     return BadRequest("Username already exists");
+        // }
 
-        // And once this class is out of scope, as in it's not being used anymore, 
-        // then the dispose method will be called and it will be disposed of.
-        using var hmacAuth = new HMACSHA512(); // use to encrypt text
-        // create instance of HMACSHA512
+        // // return Ok();
 
-        var user = new AppUser
-        {
-            UserName = registrationDto.UserName.ToLower(),
-            PasswordHash = hmacAuth.ComputeHash(Encoding.UTF8.GetBytes(registrationDto.Password)), // create byte array from password and compute hash
-            PasswordSalt = hmacAuth.Key // salt our password
-        };
+        // // And once this class is out of scope, as in it's not being used anymore, 
+        // // then the dispose method will be called and it will be disposed of.
+        // using var hmacAuth = new HMACSHA512(); // use to encrypt text
+        // // create instance of HMACSHA512
 
-        _context.Users.Add(user);
-        await _context.SaveChangesAsync();
+        // var user = new ApplicationUser
+        // {
+        //     UserName = registrationDto.UserName.ToLower(),
+        //     PasswordHash = hmacAuth.ComputeHash(Encoding.UTF8.GetBytes(registrationDto.Password)), // create byte array from password and compute hash
+        //     PasswordSalt = hmacAuth.Key // salt our password
+        // };
 
-        var token = _tokenService.CreateToken(user);
-        var loggedInUser  = new UserDto {
-            UserName = user.UserName,
-            Token = token
-        };
+        // _context.Users.Add(user);
+        // await _context.SaveChangesAsync();
 
-        return loggedInUser;
+        // var token = _tokenService.CreateToken(user);
+        // var loggedInUser  = new UserDto {
+        //     UserName = user.UserName,
+        //     Token = token
+        // };
+
+        // return loggedInUser;
     }
 
     [HttpPost("login")] // give route parameter as login

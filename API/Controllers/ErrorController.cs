@@ -23,7 +23,7 @@ public class ErrorController : BaseApiController
     }
 
     [HttpGet("server-error")]
-    public ActionResult<AppUser> GetServerError() {
+    public ActionResult<ApplicationUser> GetServerError() {
 
         // null reference error
         var payload = _appDbContext.Users.Find(-1) ?? throw new Exception("Something bad happened on server");
@@ -33,7 +33,7 @@ public class ErrorController : BaseApiController
     }
 
     [HttpGet("not-found")]
-    public ActionResult<AppUser> GetNotFound() {
+    public ActionResult<ApplicationUser> GetNotFound() {
 
         var payload = _appDbContext.Users.Find(-1);
         

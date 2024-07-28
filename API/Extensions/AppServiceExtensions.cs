@@ -1,10 +1,14 @@
 ﻿using API.Data;
 using API.IServices;
+using API.Repository;
+using API.Repository.Interfaces;
 using API.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions;
 
+// Current we are not using this extension
+// We commented out in the Program.cs, we are directly registering services in the Program.cs file
 public static class AppServiceExtensions
 {
     public static IServiceCollection AddAppServices(this IServiceCollection services,
@@ -25,6 +29,7 @@ services.AddDbContext<AppDbContext>(options =>
 services.AddCors();
 // Specify the lifetime of a service.
 services.AddScoped<ITokenService, TokenService>();
+
 
 return services;
         }

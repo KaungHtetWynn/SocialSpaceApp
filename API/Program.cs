@@ -3,6 +3,8 @@ using API.Data;
 using API.Extensions;
 using API.IServices;
 using API.Middleware;
+using API.Repository;
+using API.Repository.Interfaces;
 using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +29,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddCors();
 // Specify the lifetime of a service.
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+
+// tell Automapper where to find the code (AutoMapperProfiles file)
+// register AutoMapper as a service so that we can inject it
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // // JwtBearerDefaults -> Microsoft.AspNetCore.Authentication.JwtBearer
 // builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -47,7 +54,8 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 //     });
 
 // Services type is IServiceCollection
-//builder.Services.AddAppServices(builder.Configuration);
+// *** Custom extensions methods ***
+//builder.Services.AddAppServices(builder.Configuration); // See AppServiceExtensions file
 builder.Services.AddIdentityServices(builder.Configuration);
 
 
@@ -77,5 +85,21 @@ app.UseAuthorization();
 
 // Map controllers endpoints
 app.MapControllers();
+
+// apply migration and seed the data
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+try
+{
+    var context = services.GetRequiredService<AppDbContext>();
+    await context.Database.MigrateAsync();
+    await Seeder.SeedUsers(context);
+}
+catch (Exception ex)
+{
+
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex,"Error occurred during migration");
+}
 
 app.Run();

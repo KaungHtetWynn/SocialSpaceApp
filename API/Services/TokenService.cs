@@ -16,7 +16,7 @@ public class TokenService : ITokenService
         _configuration = configuration;
     }
 
-    public string CreateToken(AppUser user)
+    public string CreateToken(ApplicationUser user)
     {
         // Token Key Validation: Checks if the token key is present and of sufficient length.
         var tokenKey = _configuration["TokenKey"] ?? throw new Exception("TokenKey cannot be accessed from appsettings");

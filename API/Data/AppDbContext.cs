@@ -10,5 +10,8 @@ public class AppDbContext : DbContext
 
     }
 
-    public DbSet<AppUser> Users { get; set; }
+    // Table name will be Users
+    // For navigation property, it will use the name of entity, so Image
+    // If you want custom table name use [Table("Images")]
+    public DbSet<ApplicationUser> Users { get; set; }
 }

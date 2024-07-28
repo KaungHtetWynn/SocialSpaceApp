@@ -35,8 +35,8 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
               // This essentially injects the error back into the observable stream.
               // It will go to error property in register_error()
-              throw modalStateErrs.flat();
               // throwing will exit the switch
+              throw modalStateErrs.flat();
             }
             else {
               toastr.error(err.error, err.status)
@@ -61,13 +61,10 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           default:
             toastr.error('Program encountered unexpected error')
             break;
-
         }
-        console.log('after switch');
       }
 
       // the intercepted error is re-thrown to propagate it further in the application.
-      console.log('before throw err');
       throw err;
     })
   );
