@@ -14,7 +14,7 @@
         "Occupation": "Teacher",
         "Photos": [
             {
-                "ImageUrl": "https://randomuser.me/api/portraits/women/92.jpg",
+                "ImageUrl": "https://randomuser.me/api/portraits/women/1.jpg",
                 "IsProfilePhoto": true
             }
         ]
@@ -94,7 +94,7 @@
         "Occupation": "Driver",
         "Photos": [
             {
-                "ImageUrl": "https://randomuser.me/api/portraits/women/54.jpg",
+                "ImageUrl": "https://randomuser.me/api/portraits/women/32.jpg",
                 "IsProfilePhoto": true
             }
         ]
@@ -174,7 +174,7 @@
         "Occupation": "Developer",
         "Photos": [
             {
-                "ImageUrl": "https://randomuser.me/api/portraits/men/55.jpg",
+                "ImageUrl": "https://randomuser.me/api/portraits/men/67.jpg",
                 "IsProfilePhoto": true
             }
         ]

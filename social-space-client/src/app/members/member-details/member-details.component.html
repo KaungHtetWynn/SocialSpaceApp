@@ -1,1 +1,56 @@
-<p>member-details works!</p>
+@if(member)
+{
+
+<div class="row">
+    <div class="col-md-4 col-lg-3">
+        <div class="card border-dark">
+            <div class="card-header text-light" style="background-color: #a0a09a;"><strong>{{member.fullName}}</strong></div>
+            <img src="{{member.photoUrl || './assets/default_user.png'}}" class="" alt="{{member.userName}}">
+            <div class="card-body pb-0">
+                <strong>Age: </strong><p>{{member.age}}</p>
+                <strong>Location: </strong><p>{{member.city}}, {{member.country}}</p>
+                <strong>Occupation: </strong><p>{{member.occupation}}</p>
+                <strong>Member since: </strong><p>{{member.created}}</p>
+                <strong>Last active: </strong><p>{{member.lastActive}}</p>
+            </div>
+            <div class="card-footer border-dark bg-light btn-group p-0">
+                <!-- <small class="text-muted">Last Active: {{member.lastActive}}</small> -->
+
+                <!-- <div class="btn-group"> -->
+                    <button type="button" class="btn btn-danger" style="border-top-left-radius: 0%;"><i class="fa fa-heart"></i></button>
+                    <button type="button" class="btn btn-info" style="border-top-right-radius: 0%;"><i class="fa fa-envelope"></i></button>
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Angular bootstrap tabs style set in global styles.css -->
+    <div class="col-md-8 col-lg-9">
+        <tabset class="member-tabs">
+            <tab heading="About {{member.userName}}">
+                <strong>Description</strong><p>{{member.description}}</p>
+                <strong>Looking for </strong><p>{{member.lookingFor}}</p>
+            </tab>
+            <tab heading="Interests">
+                <strong>Interests</strong><p>{{member.interests}}</p>
+            </tab>
+            <!-- template reference variable #photoTab -->
+             <!-- see customize options at the api -->
+            <tab heading="Photos" #photoTab="tab">
+                @if(photoTab.active) {
+                    <gallery 
+                [items]="photos" 
+                class="gallery 
+                ">
+
+                </gallery>
+                }
+            </tab>
+            <tab heading="Chats">
+                <p>Messages will go here</p>
+            </tab>
+        </tabset>
+       
+    </div>
+</div>
+}

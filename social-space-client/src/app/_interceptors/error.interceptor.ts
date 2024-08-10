@@ -4,6 +4,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError } from 'rxjs';
 
+// Intercept the response on the way back from the API to our client
 // An interceptor for http requests made via HttpClient
 // This method intercepts outgoing HTTP requests from client and incoming HTTP responses from the server.
 // request: An instance of HttpRequest<unknown> representing the outgoing HTTP request.
@@ -17,7 +18,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   // RxJS catchError operator intercepts any errors that occur during the request or response processing.
   return next(req).pipe(
     
-    // catching errors in server response and will display error noti
+    // catching errors in server response and will display error notification
     catchError(err => {
       console.log(req)
       if (err) {

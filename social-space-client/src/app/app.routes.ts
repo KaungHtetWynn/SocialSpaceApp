@@ -27,13 +27,16 @@ export const routes: Routes = [
         canActivate: [authGuard],
         children: [
             { path: 'members', component: MemberListComponent, canActivate: [authGuard] },
-            { path: 'members/:id', component: MemberDetailsComponent }, // :id is a dynamic route
+            { path: 'members/:username', component: MemberDetailsComponent }, // :id or username is a dynamic route (route parameter)
             { path: 'lists', component: HomeComponent },
             { path: 'messages', component: HomeComponent },
-            { path: 'error-test', component: ErrorTestComponent },
-            { path: 'not-found', component: NotFoundComponent },
-            { path: 'server-error', component: ServerErrorComponent },
+            // { path: 'error-test', component: ErrorTestComponent },
+            // { path: 'not-found', component: NotFoundComponent },
+            // { path: 'server-error', component: ServerErrorComponent },
         ]
     },
+    { path: 'error-test', component: ErrorTestComponent },
+    { path: 'not-found', component: NotFoundComponent },
+    { path: 'server-error', component: ServerErrorComponent },
     { path: '**', component: HomeComponent, pathMatch: 'full' }, // wildcard - if none of the routes match
 ];

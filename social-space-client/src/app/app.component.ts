@@ -13,33 +13,25 @@ import { HomeComponent } from './home/home.component';
     styleUrl: './app.component.css',
     imports: [RouterOutlet, NgFor, NavComponent, HomeComponent]
 })
-export class AppComponent implements OnInit {
+// AppComponent is the main component and it is the first component to be initialized when you visit an Angular application.
 
-  
+export class AppComponent implements OnInit {
   private accountService = inject(AccountService);
   title = 'Social Space App';
   //users: any;
 
   ngOnInit(): void {
-    //this.getUsers();
     this.setCurrentUser();
   }
 
-
   // Key:user =	Value:{"userName":"john","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"}
+  // user = User obj
   setCurrentUser() {
-    const userLocalString = localStorage.getItem('user');
+    const userLocalString = localStorage.getItem('socialspaceuser');
     if(!userLocalString) return;
 
     // Convert JSON to JavaScript object
     const user = JSON.parse(userLocalString);
     this.accountService.currentUser.set(user);
-
-
   }
-
-  
-
-
-  
 }

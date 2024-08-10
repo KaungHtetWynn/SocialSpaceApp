@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { User } from '../_models/user';
 import { map } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class AccountService {
 
   // 2nd way - dependency injection using constructor
   private _http;
-  baseUrl = 'http://www.localhost:5000/api/';
+  //baseUrl = 'http://www.localhost:5000/api/';
+  baseUrl = environment.apiUrl;
   currentUser = signal<User | null>(null);
 
   constructor(http: HttpClient) {
@@ -26,13 +28,13 @@ export class AccountService {
   // }
 
   // pass the model as body in a post request
-  // telling that return type is User to post method
+  // <User> telling that return type is User to post method
   login(model: any) {
     return this._http.post<User>(this.baseUrl + 'account/login', model).pipe(
       map(user => {
         if(user) {
           // Create a JSON string from a JavaScript object.
-          localStorage.setItem('user', JSON.stringify(user));
+          localStorage.setItem('socialspaceuser', JSON.stringify(user));
           
 
           this.currentUser.set(user);
@@ -49,7 +51,7 @@ export class AccountService {
     return this._http.post<User>(this.baseUrl + 'account/register', model).pipe(
       map(user => {
         if(user) {
-          localStorage.setItem('user', JSON.stringify(user));
+          localStorage.setItem('socialspaceuser', JSON.stringify(user));
           this.currentUser.set(user);
         }
         // return the projected value if not we are returning 'return this._http.post'

@@ -9,11 +9,11 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
-  ngOnInit(): void {
-    this.getUsers();
-  }
-  http = inject(HttpClient) // New way (last time we use constructor injection)
+export class HomeComponent {
+  // ngOnInit(): void {
+  //   //this.getUsers();
+  // }
+  //http = inject(HttpClient) // New way (last time we use constructor injection)
   showRegisterForm : boolean = false;
   users: any;
 
@@ -25,11 +25,11 @@ export class HomeComponent implements OnInit {
     this.showRegisterForm = event;
   }
 
-  getUsers() {
-    this.http.get('http://localhost:5000/api/users').subscribe({
-      next: response => this.users = response,
-      error: error => console.log(error),
-      complete: () => console.log('Request has completed')
-    })
-  }
+  // getUsers() {
+  //   this.http.get('http://localhost:5000/api/users').subscribe({
+  //     next: response => this.users = response,
+  //     error: error => console.log(error),
+  //     complete: () => console.log('Request has completed')
+  //   })
+  // }
 }
