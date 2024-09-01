@@ -5,13 +5,14 @@ import { RouterOutlet } from '@angular/router';
 import { NavComponent } from "./nav/nav.component";
 import { AccountService } from './_services/account.service';
 import { HomeComponent } from './home/home.component';
+import { NgxSpinnerComponent } from 'ngx-spinner';
 
 @Component({
     selector: 'app-root',
     standalone: true, // Can also import CommonModule instead of NgFor, We don't need NgFor If we use @for
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, NgFor, NavComponent, HomeComponent]
+    imports: [RouterOutlet, NgFor, NavComponent, HomeComponent, NgxSpinnerComponent]
 })
 // AppComponent is the main component and it is the first component to be initialized when you visit an Angular application.
 
@@ -32,6 +33,6 @@ export class AppComponent implements OnInit {
 
     // Convert JSON to JavaScript object
     const user = JSON.parse(userLocalString);
-    this.accountService.currentUser.set(user);
+    this.accountService.currentUser.set(user); // Account Service is singleton
   }
 }

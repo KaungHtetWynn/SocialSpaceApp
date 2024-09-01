@@ -13,7 +13,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     return true;
   }
   else {
-    toastrService.error("Please log in to perform this action");
+    toastrService.error("Please log in to perform this action!");
     return false;
   }
 

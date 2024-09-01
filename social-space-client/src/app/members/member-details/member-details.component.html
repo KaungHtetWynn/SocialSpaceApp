@@ -3,14 +3,16 @@
 
 <div class="row">
     <div class="col-md-4 col-lg-3">
-        <div class="card border-dark">
-            <div class="card-header text-light" style="background-color: #a0a09a;"><strong>{{member.fullName}}</strong></div>
+        <div class="card border-dark mb-3">
+            <!-- <div class="card-header text-light" style="background-color: #a0a09a;"><strong>{{member.fullName}}</strong></div> -->
+            <div class="card-header text-light bg-dark border border-0"><strong>{{member.fullName}}</strong></div>
+            
             <img src="{{member.photoUrl || './assets/default_user.png'}}" class="" alt="{{member.userName}}">
             <div class="card-body pb-0">
-                <strong>Age: </strong><p>{{member.age}}</p>
-                <strong>Location: </strong><p>{{member.city}}, {{member.country}}</p>
-                <strong>Occupation: </strong><p>{{member.occupation}}</p>
-                <strong>Member since: </strong><p>{{member.created}}</p>
+                <strong>Age: </strong><p class="pb-0 mb-0">{{member.age}}</p>
+                <strong>Location: </strong><p class="pb-0 mb-0">{{member.city}}, {{member.country}}</p>
+                <strong>Occupation: </strong><p class="pb-0 mb-0">{{member.occupation}}</p>
+                <strong>Member since: </strong><p class="pb-0 mb-0">{{member.created}}</p>
                 <strong>Last active: </strong><p>{{member.lastActive}}</p>
             </div>
             <div class="card-footer border-dark bg-light btn-group p-0">

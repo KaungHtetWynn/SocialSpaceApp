@@ -12,19 +12,28 @@ import { MemberCardComponent } from "../member-card/member-card.component";
 })
 export class MemberListComponent implements OnInit {
 
-  private memberService = inject(MemberService);
-  members: Member[] = [];
+  memberService = inject(MemberService);
+  //members: Member[] = []; // no longer need we will get this from signal in service
+  // now we are using service to persist the array
+  
   
   ngOnInit(): void {
-    this.loadAllMembers();
+    //this.loadAllMembers();
+
+    // will only load if signal array doesn't have any members
+    if(this.memberService.members().length === 0) {
+      this.loadAllMembers();
+    }
   }
 
   loadAllMembers() {
-    this.memberService.getMembers().subscribe({
-      next: members => {
-        this.members = members;
-      }
-    })
+    // this.memberService.getMembers().subscribe({
+    //   next: members => {
+    //     this.members = members;
+    //   }
+    // })
+
+    this.memberService.getMembers()
     
   }
 

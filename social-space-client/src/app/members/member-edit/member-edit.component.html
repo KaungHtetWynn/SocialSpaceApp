@@ -1,0 +1,116 @@
+@if(member)
+{
+<div class="row">
+    <div class="col">
+        @if(editFormTrv.dirty) {
+            <div class="alert alert-info mt-0" role="alert"><i class="fa fa-info-circle me-2"></i>
+                You have made changes. Please save your changes!
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-md-4 col-lg-3">
+        <div class="card border-dark mb-3">
+            <div class="card-header text-light bg-dark border border-0"><strong>Profile</strong></div>
+
+            <img src="{{member.photoUrl || './assets/default_user.png'}}" class="" alt="{{member.userName}}">
+            <div class="card-body pb-0">
+                <strong>Age: </strong>
+                <p class="pb-0 mb-0">{{member.age}}</p>
+                <strong>Location: </strong>
+                <p class="pb-0 mb-0">{{member.city}}, {{member.country}}</p>
+                <strong>Occupation: </strong>
+                <p class="pb-0 mb-0">{{member.occupation}}</p>
+                <strong>Member since: </strong>
+                <p class="pb-0 mb-0">{{member.created}}</p>
+                <strong>Last active: </strong>
+                <p>{{member.lastActive}}</p>
+            </div>
+            <div class="card-footer border-dark bg-light btn-group p-0">
+                <!-- <small class="text-muted">Last Active: {{member.lastActive}}</small> -->
+
+                <!-- <div class="btn-group"> -->
+                <button 
+                    [disabled]="!editFormTrv.dirty"
+                    form="editForm" 
+                    type="submit" 
+                    class="btn btn-success"
+                    style="border-top-left-radius: 0%; border-top-right-radius: 0%;"><i
+                        class="fa fa-floppy-o me-2"></i>Save</button>
+                <!-- <button type="button" class="btn btn-info" style="border-top-right-radius: 0%;"><i class="fa fa-envelope"></i></button> -->
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Angular bootstrap tabs style set in global styles.css -->
+    <div class="col-md-8 col-lg-9">
+
+        <!-- @if(editFormTrv.dirty) {
+            <div class="alert alert-info mt-0" role="alert"><i class="fa fa-info-circle me-2"></i>
+                You have made changes. Please save your changes!
+            </div>
+        } -->
+        <tabset class="member-tabs">
+            <tab heading="About {{member.userName}}">
+                
+                <form id="editForm" #editFormTrv="ngForm" (ngSubmit)="updateMemberInformation()">
+
+                    <div class="mb-3">
+                        <h4>Description</h4>
+                        <textarea class="form-control" name="description" [(ngModel)]="member.description"
+                            rows="4"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <h4>Interests</h4>
+                        <textarea class="form-control" name="interests" [(ngModel)]="member.interests"
+                            rows="4"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <h4>Looks for</h4>
+                        <textarea class="form-control" name="lookingFor" [(ngModel)]="member.lookingFor"
+                            rows="4"></textarea>
+                    </div>
+
+                    <div>
+                        <h4>Other Details</h4>
+                        <div class="row mb-md-2">
+                            <div class="col-md-6">
+
+                                <input type="text" class="form-control mb-2 mb-md-0" placeholder="City" name="city"
+                                    [(ngModel)]="member.city">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control mb-2 mb-md-0" placeholder="Country"
+                                    name="country" [(ngModel)]="member.country">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <input type="text" class="form-control mb-2 m-md-0" placeholder="Occupation"
+                                    name="occupation" [(ngModel)]="member.occupation">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control mb-2 m-md-0" placeholder="Relationship"
+                                    name="maritialStatus" [(ngModel)]="member.maritialStatus">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- <strong>Description</strong><p>{{member.description}}</p>
+                <strong>Looking for </strong><p>{{member.lookingFor}}</p> -->
+            </tab>
+            <tab heading="Edit Images">
+                <!-- <strong>Interests</strong><p>{{member.interests}}</p> -->
+            </tab>
+
+        </tabset>
+
+    </div>
+</div>
+}

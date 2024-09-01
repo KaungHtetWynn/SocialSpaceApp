@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { User } from '../_models/user';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Member } from '../_models/member';
 
 @Injectable({
+  // AccountService is singleton
   providedIn: 'root'
 })
 export class AccountService {
@@ -61,7 +63,14 @@ export class AccountService {
   }
 
   logout() {
-    localStorage.removeItem('user'); // remove user obj from local storage - UserDto API
+    // localStorage.removeItem('user');
+    localStorage.removeItem('socialspaceuser'); // remove user obj from local storage - UserDto API
     this.currentUser.set(null); // set signal property to null
+  }
+
+  getFemaleMembers(): Observable<Member[]> {
+    return this._http.get<Member[]>('api/users').pipe(
+      map(members => members.filter(member => member.gender === 'female'))
+    );
   }
 }

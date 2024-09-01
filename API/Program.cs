@@ -33,6 +33,7 @@ builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository
 
 // tell Automapper where to find the code (AutoMapperProfiles file)
 // register AutoMapper as a service so that we can inject it
+// Registers AutoMapper, scans the assembly for mappings and profiles
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // // JwtBearerDefaults -> Microsoft.AspNetCore.Authentication.JwtBearer
